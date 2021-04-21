@@ -1,0 +1,50 @@
+1;
+select first_name, last_name from actor;
+2;
+select first_name, last_name from actor where first_name='john';
+3;
+select first_name, last_name from actor where last_name='neeson';
+4;
+select first_name, last_name from actor where (actor_id % 10)=0;
+5;
+select description from film where film_id=100;
+6;
+select * from film where rating='r';
+7;
+select * from film where rating !='r';
+8;
+select * from film order by length asc limit 10;
+9;
+select * from film where length=(select max(length) from film);
+10;
+select title, special_features from film where special_features like '%deleted scenes%';
+11;
+select last_name 
+from actor 
+group by last_name 
+having count(*) = 1
+order by last_name desc;
+12;
+select last_name, count(*)
+from actor
+group by last_name
+having count(last_name)>0
+order by count(*) desc;
+13;
+select actor.actor_id, actor.first_name, actor.last_name, count(actor_id) 
+as film_count
+from actor join film_actor using (actor_id)
+group by actor_id
+order by film_count desc
+limit 1;
+14;
+15;
+select avg(length) from film;
+16;
+select category.name, avg(length)from film 
+join film_category using (film_id) 
+join category using (category_id)
+group by category.name
+order by avg(length) desc;
+17;
+select title, special_features from film where description like '%robot%';
